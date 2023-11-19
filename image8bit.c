@@ -171,9 +171,18 @@ Image ImageCreate(int width, int height, uint8 maxval) { ///
   assert (width >= 0);
   assert (height >= 0);
   assert (0 < maxval && maxval <= PixMax);
-  // Insert your code here!
-}
+  Image* im1 = (Image*)malloc(sizeof(Image));
+  if(im1 == NULL){
+    errCause = "Memory allocation failed"; 
+    return NULL;
+  }
+  im1->width = width;
+  im1->height = height;
+  im1->maxval = maxval;
+  assert(invariant(im1));
+  return im1;
 
+}
 /// Destroy the image pointed to by (*imgp).
 ///   imgp : address of an Image variable.
 /// If (*imgp)==NULL, no operation is performed.
