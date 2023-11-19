@@ -171,16 +171,16 @@ Image ImageCreate(int width, int height, uint8 maxval) { ///
   assert (width >= 0);
   assert (height >= 0);
   assert (0 < maxval && maxval <= PixMax);
-  Image* im1 = (Image*)malloc(sizeof(Image));
-  if(im1 == NULL){
+  Image* im = (Image*)malloc(sizeof(Image));
+  if(im == NULL){
     errCause = "Memory allocation failed"; 
     return NULL;
   }
-  im1->width = width;
-  im1->height = height;
-  im1->maxval = maxval;
-  assert(invariant(im1));
-  return im1;
+  im->width = width;
+  im->height = height;
+  im->maxval = maxval;
+  assert(invariant(im));
+  return im;
 
 }
 /// Destroy the image pointed to by (*imgp).
@@ -190,8 +190,13 @@ Image ImageCreate(int width, int height, uint8 maxval) { ///
 /// Should never fail, and should preserve global errno/errCause.
 void ImageDestroy(Image* imgp) { ///
   assert (imgp != NULL);
-  // Insert your code here!
+  Image im = imgp;
+  free(im->pixel);
+  free(im);
+  return NULL;
 }
+
+// implementar errno/errCause x
 
 
 /// PGM file operations
