@@ -194,11 +194,11 @@ Image ImageCreate(int width, int height, uint8 maxval) { ///
 /// Should never fail, and should preserve global errno/errCause.
 void ImageDestroy(Image* imgp) { ///
   assert (imgp != NULL);
-  if (*imgp == NULL){
-    errCause = "Imgp == null"
-  } else {
+  const Image image = *imgp;
+  if (image != NULL){
+    free(image->pixel);
     free(*imgp);
-    return NULL;
+    *imgp = NULL;
   }
 }
 
@@ -338,24 +338,10 @@ int ImageValidRect(Image img, int x, int y, int w, int h) { ///
 // The returned index must satisfy (0 <= index < img->width*img->height)
 static inline int G(Image img, int x, int y) {
   int index;
+  assert(0 <= x && x < img->width);
+  assert(0 <= y && y < img->height);
 
-  img->width = x;
-  img->height = y;
-
-  if(x<10 && y>=10) {
-    index = (y * 100) + x;
-  } else if (x<10 && y < 10) {
-    index = (y * 10) + x;
-  } else if (x>=10 && y<10) {
-    index = (y * 100) + x;
-  } else{
-    index = (y * 1000) + x;
-  }
-
-  if (index > 255){
-    errCause = "Exceeded pixel";
-    return NULL;
-  }
+  index = y * img->width + x;
 
   assert (0 <= index && index < img->width*img->height);
   return index;
