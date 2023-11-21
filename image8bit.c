@@ -308,11 +308,20 @@ int ImageMaxval(Image img) { ///
 /// On return,
 /// *min is set to the minimum gray level in the image,
 /// *max is set to the maximum.
-void ImageStats(Image img, uint8* min, uint8* max) { ///
+void ImageStats(Image img, uint8* min, uint8* max) { 
   assert (img != NULL);
-  // Insert your code here!
+  *min = img->pixel[0]; // valor minimo vai adquirir o valor do primeiro pixel
+  *max = img->pixel[0]; // valor maximo vai adquirir o valor do primeiro pixel
+  for (int i = 1; i < img->width * img->height; i++) { // percorre todos os pixeis da imagem
+    uint8 pixel = img->pixel[i]; // associa do gray level a um pixel
+    if (pixel < *min){ // o valor minimo é atualizdo sempre que o pixel for menor que o valor minimo 
+      *min = pixel;
+    }
+    if (pixel > *max){ // igual ao valor minimo mas para o valor maximo
+      *max = pixel;
+  }
 }
-
+}
 /// Check if pixel position (x,y) is inside img.
 int ImageValidPos(Image img, int x, int y) { ///
   assert (img != NULL);
