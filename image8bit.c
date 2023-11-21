@@ -47,8 +47,8 @@ const uint8 PixMax = 255;
 
 // Internal structure for storing 8-bit graymap images
 struct image {
-  int width; //max = 99
-  int height; //max = 99
+  int width;
+  int height;
   int maxval;   // maximum gray value (pixels with maxval are pure WHITE)
   uint8* pixel; // pixel data (a raster scan)
 };
@@ -171,22 +171,9 @@ Image ImageCreate(int width, int height, uint8 maxval) { ///
   assert (width >= 0);
   assert (height >= 0);
   assert (0 < maxval && maxval <= PixMax);
-  Image img = (Image)malloc(sizeof(struct image));
-  if(img == NULL){
-    errCause = "Memory allocation failed"; 
-    return NULL;
-  }
-  img->width = width;
-  img->height = height;
-  img->maxval = maxval;
-  img->pixel = (uint8*)malloc(width * height * sizeof(uint8));
-  if(img->pixel == NULL){
-    free(img);
-    return NULL;
-  }
-  assert(invariant(img));
-  return img;
+  // Insert your code here!
 }
+
 /// Destroy the image pointed to by (*imgp).
 ///   imgp : address of an Image variable.
 /// If (*imgp)==NULL, no operation is performed.
@@ -194,15 +181,8 @@ Image ImageCreate(int width, int height, uint8 maxval) { ///
 /// Should never fail, and should preserve global errno/errCause.
 void ImageDestroy(Image* imgp) { ///
   assert (imgp != NULL);
-  if (*imgp == NULL){
-    errCause = "Imgp == null"
-  } else {
-    free(*imgp);
-    return NULL;
-  }
+  // Insert your code here!
 }
-
-// implementar errno/errCause x
 
 
 /// PGM file operations
@@ -340,25 +320,7 @@ int ImageValidRect(Image img, int x, int y, int w, int h) { ///
 // The returned index must satisfy (0 <= index < img->width*img->height)
 static inline int G(Image img, int x, int y) {
   int index;
-
-  img->width = x;
-  img->height = y;
-
-  if(x<10 && y>=10) {
-    index = (y * 100) + x;
-  } else if (x<10 && y < 10) {
-    index = (y * 10) + x;
-  } else if (x>=10 && y<10) {
-    index = (y * 100) + x;
-  } else{
-    index = (y * 1000) + x;
-  }
-
-  if (index > 255){
-    errCause = "Exceeded pixel";
-    return NULL;
-  }
-
+  // Insert your code here!
   assert (0 <= index && index < img->width*img->height);
   return index;
 }
@@ -430,7 +392,7 @@ void ImageBrighten(Image img, double factor) { ///
 
 /// Rotate an image.
 /// Returns a rotated version of the image.
-/// The rotation is 90 degrees clockwise.
+/// The rotation is 90 degrees anti-clockwise.
 /// Ensures: The original img is not modified.
 /// 
 /// On success, a new image is returned.
