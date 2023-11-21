@@ -171,17 +171,21 @@ Image ImageCreate(int width, int height, uint8 maxval) { ///
   assert (width >= 0);
   assert (height >= 0);
   assert (0 < maxval && maxval <= PixMax);
-  Image* im = (Image*)malloc(sizeof(Image));
-  if(im == NULL){
+  Image img = (Image)malloc(sizeof(struct image));
+  if(img == NULL){
     errCause = "Memory allocation failed"; 
     return NULL;
   }
-  im->width = width;
-  im->height = height;
-  im->maxval = maxval;
-  assert(invariant(im));
-  return im;
-
+  img->width = width;
+  img->height = height;
+  img->maxval = maxval;
+  img->pixel = (uint8*)malloc(width * height * sizeof(uint8));
+  if(img->pixel == NULL){
+    free(img);
+    return NULL;
+  }
+  assert(invariant(img));
+  return img;
 }
 /// Destroy the image pointed to by (*imgp).
 ///   imgp : address of an Image variable.
@@ -190,10 +194,12 @@ Image ImageCreate(int width, int height, uint8 maxval) { ///
 /// Should never fail, and should preserve global errno/errCause.
 void ImageDestroy(Image* imgp) { ///
   assert (imgp != NULL);
-  Image im = imgp;
-  free(im->pixel);
-  free(im);
-  return NULL;
+  if (*imgp == NULL){
+    errCause = "Imgp == null"
+  } else {
+    free(*imgp);
+    return NULL;
+  }
 }
 
 // implementar errno/errCause x
