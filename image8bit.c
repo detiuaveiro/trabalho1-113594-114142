@@ -184,7 +184,6 @@ Image ImageCreate(int width, int height, uint8 maxval) { ///
     free(img);
     return NULL;
   }
-  assert(invariant(img));
   return img;
 }
 /// Destroy the image pointed to by (*imgp).
