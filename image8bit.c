@@ -319,8 +319,8 @@ void ImageStats(Image img, uint8* min, uint8* max) {
     }
     if (pixel > *max){ // igual ao valor minimo mas para o valor maximo
       *max = pixel;
+     }
   }
-}
 }
 /// Check if pixel position (x,y) is inside img.
 int ImageValidPos(Image img, int x, int y) { ///
