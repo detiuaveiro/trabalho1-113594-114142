@@ -385,10 +385,10 @@ void ImageSetPixel(Image img, int x, int y, uint8 level) { ///
 /// resulting in a "photographic negative" effect.
 void ImageNegative(Image img) { ///
   assert (img != NULL);
-  int maximo = img->maxval;
-  for (int i = 1; i < img->width * img->height; i++){
-    uint8 pixel = img->pixel[i];
-    pixel = maximo - pixel;
+  int maximo = img->maxval; // \maximo vai adquirir o valor maximo da imagem (poderia ser 255 uma vez que é uma imagem de 8 bits)
+  for (int i = 1; i < img->width * img->height; i++){ // percorre todos os pixeis da imagem
+    uint8 pixel = img->pixel[i]; 
+    pixel = maximo - pixel; // o pixel vai adquirir o valor maximo menos o valor do pixel (inversão)
   }
 }
 
@@ -397,7 +397,15 @@ void ImageNegative(Image img) { ///
 /// all pixels with level>=thr to white (maxval).
 void ImageThreshold(Image img, uint8 thr) { ///
   assert (img != NULL);
-  // Insert your code here!
+  for (int i = 1; i < img->width * img->height; i++){
+    uint8 pixel = img->pixel[i];
+    if (pixel < thr){ // se o pixel for menor que o threshold, o pixel vai ser preto se não vai ser branco
+      pixel = 0;
+    }
+    else{
+      pixel = img->maxval;
+    }
+  }
 }
 
 /// Brighten image by a factor.
@@ -406,8 +414,15 @@ void ImageThreshold(Image img, uint8 thr) { ///
 /// darken the image if factor<1.0.
 void ImageBrighten(Image img, double factor) { ///
   assert (img != NULL);
-  // ? assert (factor >= 0.0);
-  // Insert your code here!
+  assert (factor >= 0.0); 
+  for (int i = 1; i < img->width * img->height; i++){
+    uint8 pixel = img->pixel[i];
+    pixel = pixel * factor; // o pixel vai adquirir o valor do pixel vezes o factor
+    if (pixel > img->maxval){
+      pixel = img->maxval; // se o pixel for maior que o valor maximo da imagem, o pixel vai adquirir o valor maximo da imagem
+    }
+  }
+  
 }
 
 
