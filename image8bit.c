@@ -338,7 +338,25 @@ int ImageValidRect(Image img, int x, int y, int w, int h) { ///
 // The returned index must satisfy (0 <= index < img->width*img->height)
 static inline int G(Image img, int x, int y) {
   int index;
-  // Insert your code here!
+
+  img->width = x;
+  img->height = y;
+
+  if(x<10 && y>=10) {
+    index = (y * 100) + x;
+  } else if (x<10 && y < 10) {
+    index = (y * 10) + x;
+  } else if (x>=10 && y<10) {
+    index = (y * 100) + x;
+  } else{
+    index = (y * 1000) + x;
+  }
+
+  if (index > 255){
+    errCause = "Exceeded pixel";
+    return NULL;
+  }
+
   assert (0 <= index && index < img->width*img->height);
   return index;
 }
