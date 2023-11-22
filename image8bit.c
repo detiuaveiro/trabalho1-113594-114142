@@ -517,7 +517,13 @@ void ImagePaste(Image img1, int x, int y, Image img2) { ///
   assert (img1 != NULL);
   assert (img2 != NULL);
   assert (ImageValidRect(img1, x, y, img2->width, img2->height));
-  // Insert your code here!
+  for (int new_y = 0; new_y < img2->height; new_y++) { // percorre todos os pixeis da imagem a colar
+    for (int new_x = 0; new_x < img2->width; new_x++) {
+      int old_x = x + new_x; // calcula a posição do pixel na imagem original
+      int old_y = y + new_y;
+      img1->pixel[old_y * img1->width + old_x] = img2->pixel[new_y * img2->width + new_x]; // o pixel da imagem original vai adquirir o valor do pixel da imagem a colar
+    }
+  }
 }
 
 /// Blend an image into a larger image.
@@ -530,7 +536,19 @@ void ImageBlend(Image img1, int x, int y, Image img2, double alpha) { ///
   assert (img1 != NULL);
   assert (img2 != NULL);
   assert (ImageValidRect(img1, x, y, img2->width, img2->height));
-  // Insert your code here!
+  for (int new_y = 0; new_y < img2->height; new_y++) { // percorre todos os pixeis da imagem a colar
+    for (int new_x = 0; new_x < img2->width; new_x++) {
+      int old_x = x + new_x; // calcula a posição do pixel na imagem original
+      int old_y = y + new_y;
+      uint8 pixel1 = img1->pixel[old_y * img1->width + old_x]; // associa o gray level a um pixel da imagem original
+      uint8 pixel2 = img2->pixel[new_y * img2->width + new_x]; // associa o gray level a um pixel da imagem a colar
+      int pixel = pixel1 * (1 - alpha) + pixel2 * alpha + 0.5; // calcula o novo gray level do pixel
+      if (pixel > img1->maxval){ // se o pixel for maior que o valor maximo da imagem, o pixel vai adquirir o valor maximo da imagem
+        pixel = img1->maxval;
+      }
+      img1->pixel[old_y * img1->width + old_x] = pixel; // o pixel da imagem original vai adquirir o novo gray level
+    }
+  }
 }
 
 /// Compare an image to a subimage of a larger image.
