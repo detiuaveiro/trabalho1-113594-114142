@@ -588,7 +588,7 @@ int ImageLocateSubImage(Image img1, int* px, int* py, Image img2) { ///
   }
 
   return 0;
-
+}
 
 /// Filtering
 
@@ -597,6 +597,28 @@ int ImageLocateSubImage(Image img1, int* px, int* py, Image img2) { ///
 /// [x-dx, x+dx]x[y-dy, y+dy].
 /// The image is changed in-place.
 void ImageBlur(Image img, int dx, int dy) { ///
-  // Insert your code here!
+  assert (img != NULL);
+  assert (dx >= 0);
+  assert (dy >= 0);
+  Image new_img = ImageCreate(img->width, img->height, img->maxval); // cria uma nova imagem com as mesmas dimensões da imagem original
+  for (int y = 0; y < img->height; y++) { // percorre todos os pixeis da imagem
+    for (int x = 0; x < img->width; x++) {
+      int sum = 0;
+      int count = 0;
+      for (int new_y = y - dy; new_y <= y + dy; new_y++) { // percorre todos os pixeis da imagem a serem filtrados
+        for (int new_x = x - dx; new_x <= x + dx; new_x++) {
+          if (ImageValidPos(img, new_x, new_y)) { // verifica se a posição do pixel é valida
+            sum += img->pixel[new_y * img->width + new_x]; // soma o gray level do pixel
+            count++; // incrementa o contador
+          }
+        }
+      }
+      new_img->pixel[y * img->width + x] = sum / count; // o pixel da nova imagem vai adquirir o valor da soma dos gray levels dos pixeis a serem filtrados dividido pelo numero de pixeis a serem filtrados
+    }
+  }
+  for (int i = 0; i < img->width * img->height; i++) {
+    img->pixel[i] = new_img->pixel[i]; // a imagem original vai adquirir o valor da nova imagem
+  }
+  ImageDestroy(&new_img);
 }
 
