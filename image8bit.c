@@ -451,7 +451,6 @@ void ImageBrighten(Image img, double factor) { ///
 Image ImageRotate(Image img) { ///
   assert (img != NULL);
   Image new_img = ImageCreate(img->height, img->width, img->maxval); // cria uma nova imagem com as mesmas dimensões da imagem original
-  ImageMirror(new_img);
   for (int y = 0; y < img->height; y++) {
     for (int x = 0; x < img->width; x++) {
       new_img->pixel[G(img, y, img->width - 1 - x)] = img->pixel[G(img, x, y)];
