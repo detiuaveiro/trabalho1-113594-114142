@@ -10,11 +10,12 @@
 /// 2013, 2023
 
 // Student authors (fill in below):
-// NMec:  Name:
+// NMec:114142  Name:Hugo Dias
+// NMec:113594  Name:António Costa
 // 
 // 
 // 
-// Date:
+// Date: 23/11/2023
 //
 
 #include "image8bit.h"
