@@ -451,7 +451,6 @@ void ImageBrighten(Image img, double factor) { ///
 Image ImageRotate(Image img) { ///
   assert (img != NULL);
   Image new_img = ImageCreate(img->height, img->width, img->maxval); // cria uma nova imagem com as mesmas dimensões da imagem original
-  ImageMirror(new_img);
   for (int y = 0; y < img->height; y++) {
     for (int x = 0; x < img->width; x++) {
       new_img->pixel[G(img, y, img->width - 1 - x)] = img->pixel[G(img, x, y)];
@@ -495,8 +494,17 @@ Image ImageMirror(Image img) { ///
 Image ImageCrop(Image img, int x, int y, int w, int h) { ///
   assert (img != NULL);
   assert (ImageValidRect(img, x, y, w, h));
-  // Insert your code here!
+   Image new_img = ImageCreate(w, h, img->maxval); // cria uma nova imagem com as dimensões do retangulo
+  for (int new_y = 0; new_y < h; new_y++) { // percorre todos os pixeis da nova imagem
+    for (int new_x = 0; new_x < w; new_x++) { 
+      int old_x = x + new_x; // calcula a posição do pixel na imagem original
+      int old_y = y + new_y;
+      new_img->pixel[new_y * w + new_x] = img->pixel[old_y * img->width + old_x]; // o pixel da nova imagem vai adquirir o valor do pixel da imagem original
+    }
+  }
+  return new_img;
 }
+
 
 
 /// Operations on two images
