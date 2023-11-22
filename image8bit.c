@@ -462,8 +462,16 @@ Image ImageRotate(Image img) { ///
 /// On failure, returns NULL and errno/errCause are set accordingly.
 Image ImageMirror(Image img) { ///
   assert (img != NULL);
-  // Insert your code here!
+  Image new_img = ImageCreate(img->width, img->height, img->maxval); // cria uma nova imagem com as mesmas dimensões da imagem original
+  for (int y = 0; y < img->height; y++) {
+    for (int x = 0; x < img->width; x++) {
+      int mirror_x = img->width - 1 - x; // calcula a posição do pixel espelhado
+      new_img->pixel[y * new_img->width + mirror_x] = img->pixel[y * img->width + x]; // o pixel da nova imagem vai adquirir o valor do pixel da imagem original espelhado
+    }
+  }
+  return new_img;
 }
+
 
 /// Crop a rectangular subimage from img.
 /// The rectangle is specified by the top left corner coords (x, y) and
