@@ -450,7 +450,14 @@ void ImageBrighten(Image img, double factor) { ///
 /// On failure, returns NULL and errno/errCause are set accordingly.
 Image ImageRotate(Image img) { ///
   assert (img != NULL);
-  // Insert your code here!
+  Image new_img = ImageCreate(img->height, img->width, img->maxval); // cria uma nova imagem com as mesmas dimensões da imagem original
+  ImageMirror(new_img);
+  for (int y = 0; y < img->height; y++) {
+    for (int x = 0; x < img->width; x++) {
+      new_img->pixel[G(img, y, img->width - 1 - x)] = img->pixel[G(img, x, y)];
+    }
+  }
+  return new_img;
 }
 
 /// Mirror an image = flip left-right.
