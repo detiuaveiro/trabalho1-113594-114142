@@ -559,15 +559,16 @@ int ImageMatchSubImage(Image img1, int x, int y, Image img2) { ///
   assert (img1 != NULL);
   assert (img2 != NULL);
   assert (ImageValidPos(img1, x, y));
-  
+  int count;
   for (int i = 0; i < img2->height; i++) {
     for (int j = 0; j < img2->width; j++) {
+      count++;
       if (img1->pixel[(y + i) * img1->width + (x + j)] != img2->pixel[i * img2->width + j]) {
         return 0;
       }
     }
   }
-
+  printf("count :%d\n", count);
   return 1;
 }
 
@@ -601,6 +602,7 @@ void ImageBlur(Image img, int dx, int dy) { ///
   assert (img != NULL);
   assert (dx >= 0);
   assert (dy >= 0);
+  int count1 = 0;
   Image new_img = ImageCreate(img->width, img->height, img->maxval); // cria uma nova imagem com as mesmas dimensões da imagem original
   for (int y = 0; y < img->height; y++) { // percorre todos os pixeis da imagem
     for (int x = 0; x < img->width; x++) {
@@ -611,15 +613,21 @@ void ImageBlur(Image img, int dx, int dy) { ///
           if (ImageValidPos(img, new_x, new_y)) { // verifica se a posição do pixel é valida
             sum += img->pixel[new_y * img->width + new_x]; // soma o gray level do pixel
             count++; // incrementa o contador
+            count1++;
           }
         }
       }
+      
       new_img->pixel[y * img->width + x] = (sum + count/2)/ count; // o pixel da nova imagem vai adquirir o valor da soma dos gray levels dos pixeis a serem filtrados dividido pelo numero de pixeis a serem filtrados
     }
+    
   }
+  printf("count: %d\n", count1);
+  
   for (int i = 0; i < img->width * img->height; i++) {
     img->pixel[i] = new_img->pixel[i]; // a imagem original vai adquirir o valor da nova imagem
   }
+  
   ImageDestroy(&new_img);
 }
 

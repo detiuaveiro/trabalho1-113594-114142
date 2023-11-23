@@ -73,6 +73,16 @@ test9: $(PROGS) setup
 	./imageTool test/original.pgm blur 7,7 save blur.pgm
 	cmp blur.pgm test/blur.pgm
 
+testlocate1: $(PROGS) setup
+	./imageTool test/crop.pgm test/original.pgm locate
+
+testlocate2: $(PROGS) setup
+	./imageTool pgm/small/art3_222x217.pgm pgm/medium/mandrill_512x512.pgm paste 50,222 save PasteTest.pgm
+	./imageTool pgm/small/art3_222x217.pgm PasteTest.pgm locate
+
+testblur1: $(PROGS) setup
+	./imageTool pgm/medium/mandrill_512x512.pgm blur 2,9 save BlurTest.pgm
+
 .PHONY: tests
 tests: $(TESTS)
 
