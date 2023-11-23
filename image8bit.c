@@ -614,7 +614,7 @@ void ImageBlur(Image img, int dx, int dy) { ///
           }
         }
       }
-      new_img->pixel[y * img->width + x] = sum / count; // o pixel da nova imagem vai adquirir o valor da soma dos gray levels dos pixeis a serem filtrados dividido pelo numero de pixeis a serem filtrados
+      new_img->pixel[y * img->width + x] = (sum + count/2)/ count; // o pixel da nova imagem vai adquirir o valor da soma dos gray levels dos pixeis a serem filtrados dividido pelo numero de pixeis a serem filtrados
     }
   }
   for (int i = 0; i < img->width * img->height; i++) {
