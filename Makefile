@@ -76,9 +76,82 @@ test9: $(PROGS) setup
 testlocate1: $(PROGS) setup
 	./imageTool test/crop.pgm test/original.pgm locate
 
-testlocate2: $(PROGS) setup
+testlocate2: $(PROGS) setup # pequena na media
 	./imageTool pgm/small/art3_222x217.pgm pgm/medium/mandrill_512x512.pgm paste 50,222 save PasteTest.pgm
 	./imageTool pgm/small/art3_222x217.pgm PasteTest.pgm locate
+
+testlocate3.0: $(PROGS) setup # pequena na grande (fim)
+	./imageTool pgm/small/art4_300x300.pgm pgm/large/airfield-05_1600x1200.pgm paste 1300,900 save PasteTest.pgm
+	./imageTool pgm/small/art4_300x300.pgm PasteTest.pgm locate
+
+testlocate3.0.1: $(PROGS) setup # pequena na grande (meio)
+	./imageTool pgm/small/art4_300x300.pgm pgm/large/airfield-05_1600x1200.pgm paste 0,0 save PasteTest.pgm
+	./imageTool pgm/small/art4_300x300.pgm PasteTest.pgm locate
+
+testlocate3.0.2: $(PROGS) setup # pequena na grande (inicio)
+	./imageTool pgm/small/art4_300x300.pgm pgm/large/airfield-05_1600x1200.pgm paste 650,450 save PasteTest.pgm
+	./imageTool pgm/small/art4_300x300.pgm PasteTest.pgm locate
+
+testlocate3.0.3: $(PROGS) setup # pequena na grande (meio e inicio)
+	./imageTool pgm/small/art4_300x300.pgm pgm/large/airfield-05_1600x1200.pgm paste 325,225 save PasteTest.pgm
+	./imageTool pgm/small/art4_300x300.pgm PasteTest.pgm locate
+
+testlocate3.0.4: $(PROGS) setup # pequena na grande (meio e fim)
+	./imageTool pgm/small/art4_300x300.pgm pgm/large/airfield-05_1600x1200.pgm paste 975,675 save PasteTest.pgm
+	./imageTool pgm/small/art4_300x300.pgm PasteTest.pgm locate
+
+testlocate3.1.0: $(PROGS) setup # com a mesma grande e diferente pequenas 
+	./imageTool pgm/small/art4_300x300.pgm pgm/large/airfield-05_1600x1200.pgm paste 975,675 save PasteTest.pgm
+	./imageTool pgm/small/art4_300x300.pgm PasteTest.pgm locate
+
+testlocate3.1.1: $(PROGS) setup # com a mesma grande e diferente pequenas 
+	./imageTool pgm/small/art3_222x217.pgm pgm/large/airfield-05_1600x1200.pgm paste 975,675 save PasteTest.pgm
+	./imageTool pgm/small/art3_222x217.pgm PasteTest.pgm locate
+
+testlocate3.1.2: $(PROGS) setup # com a mesma grande e diferente pequenas 
+	./imageTool pgm/small/bird_256x256.pgm pgm/large/airfield-05_1600x1200.pgm paste 975,675 save PasteTest.pgm
+	./imageTool pgm/small/bird_256x256.pgm PasteTest.pgm locate
+
+testlocate3.2.0: $(PROGS) setup # com a mesma pequena e diferente grandes 
+	./imageTool pgm/small/bird_256x256.pgm pgm/large/ireland-06-1200x1600.pgm paste 300,300 save PasteTest.pgm
+	./imageTool pgm/small/bird_256x256.pgm PasteTest.pgm locate
+
+testlocate3.2.1: $(PROGS) setup # com a mesma pequena e diferente grandes 
+	./imageTool pgm/small/bird_256x256.pgm pgm/large/einstein_940x940.pgm paste 300,300 save PasteTest.pgm
+	./imageTool pgm/small/bird_256x256.pgm PasteTest.pgm locate
+
+testlocate3.2.2: $(PROGS) setup # com a mesma pequena e diferente grandes 
+	./imageTool pgm/small/bird_256x256.pgm pgm/large/airfield-05_1600x1200.pgm paste 300,300 save PasteTest.pgm
+	./imageTool pgm/small/bird_256x256.pgm PasteTest.pgm locate
+
+testlocate3.2.3: $(PROGS) setup # com a mesma pequena e diferente grandes 
+	./imageTool pgm/small/bird_256x256.pgm pgm/large/ireland_03_1600x1200.pgm paste 300,300 save PasteTest.pgm
+	./imageTool pgm/small/bird_256x256.pgm PasteTest.pgm locate
+
+testlocate3.3.1: $(PROGS) setup # com a mesma pequena e diferente medias 
+	./imageTool pgm/small/bird_256x256.pgm pgm/medium/airfield-05_640x480.pgm paste 100,100 save PasteTest.pgm
+	./imageTool pgm/small/bird_256x256.pgm PasteTest.pgm locate
+
+testlocate3.3.2: $(PROGS) setup # com a mesma pequena e diferente medias 
+	./imageTool pgm/small/bird_256x256.pgm pgm/medium/ireland-03_640x480.pgm paste 100,100 save PasteTest.pgm
+	./imageTool pgm/small/bird_256x256.pgm PasteTest.pgm locate
+
+testlocate3.3.3: $(PROGS) setup # com a mesma pequena e diferente medias 
+	./imageTool pgm/small/bird_256x256.pgm pgm/medium/mandrill_512x512.pgm paste 100,100 save PasteTest.pgm
+	./imageTool pgm/small/bird_256x256.pgm PasteTest.pgm locate
+
+testlocate3.3.4: $(PROGS) setup # com a mesma pequena e diferente medias 
+	./imageTool pgm/small/bird_256x256.pgm pgm/medium/tac-pulmao_512x512.pgm paste 100,100 save PasteTest.pgm
+	./imageTool pgm/small/bird_256x256.pgm PasteTest.pgm locate
+
+testlocate3.3.5: $(PROGS) setup # com a mesma pequena e diferente medias 
+	./imageTool pgm/small/bird_256x256.pgm pgm/medium/tools_2_765x460.pgm paste 100,100 save PasteTest.pgm
+	./imageTool pgm/small/bird_256x256.pgm PasteTest.pgm locate
+
+
+testlocate5: $(PROGS) setup # media na grande
+	./imageTool pgm/medium/tools_2_765x460.pgm pgm/large/ireland_03_1600x1200.pgm paste 50,222 save PasteTest.pgm
+	./imageTool pgm/medium/tools_2_765x460.pgm PasteTest.pgm locate
 
 testblur1: $(PROGS) setup
 	./imageTool pgm/medium/mandrill_512x512.pgm blur 2,9 save BlurTest.pgm
