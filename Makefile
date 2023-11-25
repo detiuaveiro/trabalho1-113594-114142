@@ -156,6 +156,79 @@ testlocate5: $(PROGS) setup # media na grande
 testblur1: $(PROGS) setup
 	./imageTool pgm/medium/mandrill_512x512.pgm blur 2,9 save BlurTest.pgm
 
+	# fazer com blurs diferentes na mesma imagem
+
+testblur2.0: $(PROGS) setup
+	./imageTool pgm/medium/mandrill_512x512.pgm blur 1,1 save BlurTest.pgm
+
+testblur2.1: $(PROGS) setup
+	./imageTool pgm/medium/mandrill_512x512.pgm blur 2,2 save BlurTest.pgm
+
+testblur2.2: $(PROGS) setup
+	./imageTool pgm/medium/mandrill_512x512.pgm blur 3,3 save BlurTest.pgm
+
+testblur2.3: $(PROGS) setup
+	./imageTool pgm/medium/mandrill_512x512.pgm blur 4,4 save BlurTest.pgm
+
+testblur2.4: $(PROGS) setup
+	./imageTool pgm/medium/mandrill_512x512.pgm blur 5,5 save BlurTest.pgm
+
+testblur2.5: $(PROGS) setup
+	./imageTool pgm/medium/mandrill_512x512.pgm blur 6,6 save BlurTest.pgm
+
+testblur2.6: $(PROGS) setup
+	./imageTool pgm/medium/mandrill_512x512.pgm blur 7,7 save BlurTest.pgm
+
+testblur2.7: $(PROGS) setup
+	./imageTool pgm/medium/mandrill_512x512.pgm blur 8,8 save BlurTest.pgm
+
+testblur2.8: $(PROGS) setup
+	./imageTool pgm/medium/mandrill_512x512.pgm blur 9,9 save BlurTest.pgm
+
+testblur2.9: $(PROGS) setup
+	./imageTool pgm/medium/mandrill_512x512.pgm blur 10,10 save BlurTest.pgm
+
+testblur2.10: $(PROGS) setup
+	./imageTool pgm/medium/mandrill_512x512.pgm blur 11,11 save BlurTest.pgm
+
+testblur2.11: $(PROGS) setup
+	./imageTool pgm/medium/mandrill_512x512.pgm blur 13,13 save BlurTest.pgm
+
+testblur2.12: $(PROGS) setup
+	./imageTool pgm/medium/mandrill_512x512.pgm blur 15,15 save BlurTest.pgm
+
+testblur2.13: $(PROGS) setup
+	./imageTool pgm/medium/mandrill_512x512.pgm blur 17,17 save BlurTest.pgm
+
+testblur2.14: $(PROGS) setup
+	./imageTool pgm/medium/mandrill_512x512.pgm blur 19,19 save BlurTest.pgm
+
+	# imagens de diferentes tamanhos
+
+testblur3.1: $(PROGS) setup
+	./imageTool pgm/large/airfield-05_1600x1200.pgm blur 9,9 save BlurTest.pgm
+
+testblur3.2: $(PROGS) setup
+	./imageTool pgm/large/einstein_940x940.pgm blur 9,9 save BlurTest.pgm
+
+testblur3.3: $(PROGS) setup
+	./imageTool pgm/large/ireland-06-1200x1600.pgm blur 9,9 save BlurTest.pgm
+
+testblur3.4: $(PROGS) setup
+	./imageTool pgm/medium/airfield-05_640x480.pgm blur 9,9 save BlurTest.pgm
+
+testblur3.5: $(PROGS) setup
+	./imageTool pgm/medium/mandrill_512x512.pgm blur 9,9 save BlurTest.pgm
+
+testblur3.6: $(PROGS) setup
+	./imageTool pgm/medium/tools_2_765x460.pgm blur 9,9 save BlurTest.pgm
+
+testblur3.7: $(PROGS) setup
+	./imageTool pgm/small/art3_222x217.pgm blur 9,9 save BlurTest.pgm
+
+testblur3.8: $(PROGS) setup
+	./imageTool pgm/small/art4_300x300.pgm blur 9,9 save BlurTest.pgm
+
 .PHONY: tests
 tests: $(TESTS)
 

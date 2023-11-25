@@ -610,10 +610,10 @@ void ImageBlur(Image img, int dx, int dy) { ///
       int count = 0;
       for (int new_y = y - dy; new_y <= y + dy; new_y++) { // percorre todos os pixeis da imagem a serem filtrados
         for (int new_x = x - dx; new_x <= x + dx; new_x++) {
+          count1++;
           if (ImageValidPos(img, new_x, new_y)) { // verifica se a posição do pixel é valida
             sum += img->pixel[new_y * img->width + new_x]; // soma o gray level do pixel
             count++; // incrementa o contador
-            count1++;
           }
         }
       }
